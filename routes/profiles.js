@@ -4,10 +4,20 @@ const conn = require("../db/Connection");
 const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
+const cloudinary=require('cloudinary');
+
+
+
+cloudinary.config({
+  cloud_name: "dpejr2cmb",
+  api_key: "399845886473875",
+  api_secret: "5-dtzeYTK-DFHudpgkqszwsPnfA",
+});
 
 // routes
 
 router.post("/create", UploadImage().single("image"), (req, res) => {
+  cloudinary.v2.uploader.upload(req.file.filename);
   const sqlQuery =
     "INSERT INTO `users`(`FullName`, `Username`, `Followers`, `Following`, `image`,`position`) VALUES (?,?,?,?,?,?)";
   var values = [
@@ -138,14 +148,14 @@ router.post(
 function UploadImage(req, res, next) {
   // code
   var storageEngine = multer.diskStorage({
-    destination: "./public/profile",
-    filename: (req, file, cb) => {
-      cb(
-        null,
-        `${file.fieldname}_${new Date().getTime()}` +
-          path.extname(file.originalname)
-      );
-    },
+    destination: {}
+    // filename: (req, file, cb) => {
+    //   cb(
+    //     null,
+    //     `${file.fieldname}_${new Date().getTime()}` +
+    //       path.extname(file.originalname)
+    //   );
+    // },
   });
 
   const upload = multer({
