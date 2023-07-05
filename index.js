@@ -4,13 +4,14 @@ const multer=require("multer");
 
 const app = express();
 const cors = require('cors');
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+
+app.use(cors());
+app.use(express.static("public"));
 
 require('dotenv').config();
-app.use(express.urlencoded({extended: false}))
 
-app.use(express.json())
-app.use(cors())
-app.use(express.static("public"))
 app.get("/", (req, res) => {
   return res.json({ message: "Server is running and ready to cook" });
 });
