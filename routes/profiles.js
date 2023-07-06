@@ -6,7 +6,14 @@ const path = require("path");
 const fs = require("fs");
 const cloudinary=require('cloudinary');
 const cors = require("cors");
+router.use(
+  cors({
+    origin: "https://hirehero.000webhostapp.com",
+    methods: ['GET','POST','DELETE','PUT'],
+    credentials: true
 
+  })
+);
 
 router.post("/create", UploadImage().single("image"), (req, res) => {
   const sqlQuery =
@@ -139,14 +146,14 @@ router.post(
 function UploadImage(req, res, next) {
   // code
   var storageEngine = multer.diskStorage({
-    destination: {}
-    // filename: (req, file, cb) => {
-    //   cb(
-    //     null,
-    //     `${file.fieldname}_${new Date().getTime()}` +
-    //       path.extname(file.originalname)
-    //   );
-    // },
+    destination: "./public/profile/",
+    filename: (req, file, cb) => {
+      cb(
+        null,
+        `${file.fieldname}_${new Date().getTime()}` +
+          path.extname(file.originalname)
+      );
+    },
   });
 
   const upload = multer({

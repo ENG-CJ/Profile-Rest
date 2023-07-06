@@ -10,7 +10,7 @@ app.use(express.json());
 app.use(express.static("public"));
 app.use(
   cors({
-    origin: "https://hirehero.000webhostapp.com/",
+    origin: "https://hirehero.000webhostapp.com",
     methods: ["GET", "POST", "DELETE", "PUT"],
     credentials: true,
   })
