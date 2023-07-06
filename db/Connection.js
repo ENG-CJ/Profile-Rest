@@ -8,6 +8,7 @@ const conn= ()=>{
      password: process.env.DB_PASSWORD,
      database: process.env.DB_NAME,
      connectionLimit: 500,
+     
     
    });
 
