@@ -6,20 +6,7 @@ const path = require("path");
 const fs = require("fs");
 const cloudinary=require('cloudinary');
 const cors = require("cors");
-const corsOptions = {
-  origin: "*",
-  credentials: true, //access-control-allow-credentials:true
-  optionSuccessStatus: 200,
-};
 
-router.use(cors(corsOptions))
-cloudinary.config({
-  cloud_name: "dpejr2cmb",
-  api_key: "399845886473875",
-  api_secret: "5-dtzeYTK-DFHudpgkqszwsPnfA",
-});
-
-// routes
 
 router.post("/create", UploadImage().single("image"), (req, res) => {
   const sqlQuery =
